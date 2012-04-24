@@ -35,7 +35,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-    require 'config.php';
+// Hacky way to get the AJAX calls to work with minimal interferee to the library
+if (!defined('MOODLE_INTERNAL')) {
+    require_once(dirname(__FILE__).'/../../config.php');
+    require_login(1);
+    require_capability('report/unittest:view', get_system_context());
+}
+
+require 'config.php';
 
     // Helper functions
     function get_snapshots() {
@@ -69,18 +76,18 @@
         } else {
             echo 'OK';
         }
-        exit;
+        return;
     } elseif ( isset($_GET['snapshots']) && $_GET['snapshots'] == '1' ) {
         $results = get_snapshots();
         echo json_encode($results);
-        exit;
+        return;
     }
 
     if ( empty($_POST) ) {
         $results = get_snapshots();
 
         include 'ui/index.html';
-        exit;
+        return;
     }
 
     // Archives
@@ -93,7 +100,7 @@
         $content = ob_get_contents();
         ob_end_clean();
         echo $content;
-        exit;
+        return;
     }
 
     require 'lib/VPU.php';
@@ -117,7 +124,7 @@
         $db = new PDO_MySQL($config);
 
         echo $vpu->build_graph($graph_type, $time_frame, $start_date, $end_date, $db);
-        exit;
+        return;
     }
 
     // Tests
