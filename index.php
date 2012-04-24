@@ -35,17 +35,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-//ini_set('display_errors', 1);
-//ini_set('error_reporting', E_ALL);
-
-// Prevents errors - we need all classes declared at the start so that when a test file is included,
-// we can see the differences.
-require_once(dirname(__FILE__).'/../../config.php');
-require_login(1);
-require_capability('report/unittest:view', get_system_context());
-
-//$filename = $CFG->dirroot.'/local/phpunit_selenium/moodle_phpunit_selenium_test_case.php';
-//require_once($filename);
+// Hacky way to get the AJAX calls to work with minimal interferee to the library
+if (!defined('MOODLE_INTERNAL')) {
+    require_once(dirname(__FILE__).'/../../config.php');
+    require_login(1);
+    require_capability('report/unittest:view', get_system_context());
+}
 
 require 'config.php';
 
