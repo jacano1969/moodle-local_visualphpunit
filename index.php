@@ -40,7 +40,9 @@
 
 // Prevents errors - we need all classes declared at the start so that when a test file is included,
 // we can see the differences.
-defined('MOODLE_INTERNAL') || die(); // makes sure we have the wrapper to ensure security
+require_once(dirname(__FILE__).'/../../config.php');
+require_login(1);
+require_capability('report/unittest:view', get_system_context());
 
 //$filename = $CFG->dirroot.'/local/phpunit_selenium/moodle_phpunit_selenium_test_case.php';
 //require_once($filename);

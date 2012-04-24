@@ -52,7 +52,10 @@ set_include_path(get_include_path().PATH_SEPARATOR.
 
 global $CFG;
 
-
+if (!isset($testdirectory)) {
+    $testdirectory =
+        optional_param('testdirectory', '/local/visualphpunit/tests/', PARAM_SAFEPATH);
+}
 if ($testdirectory) {
     define('TEST_DIRECTORY', $testdirectory.'/');
 } else {
