@@ -35,6 +35,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+defined('MOODLE_INTERNAL') || die();
+
+// TODO need extra security stuff here too?
+
 ini_set('display_errors', 1);
 
 // The directory where this application is installed
@@ -46,8 +50,14 @@ define('PEAR_PATH', '/usr/share/pear');
 set_include_path(get_include_path().PATH_SEPARATOR.
                  PEAR_PATH.PATH_SEPARATOR);
 
-// The directory where the tests reside
-define('TEST_DIRECTORY', BASE_INSTALL . '/tests/');
+global $CFG;
+
+
+if ($testdirectory) {
+    define('TEST_DIRECTORY', $testdirectory.'/');
+} else {
+    define('TEST_DIRECTORY', BASE_INSTALL.'/tests/');
+}
 
 /*
  * Optional settings
