@@ -42,8 +42,8 @@
 // we can see the differences.
 defined('MOODLE_INTERNAL') || die(); // makes sure we have the wrapper to ensure security
 
-$filename = dirname(__FILE__).'/../moodle_phpunit_selenium_test_case.php';
-require_once($filename);
+//$filename = $CFG->dirroot.'/local/phpunit_selenium/moodle_phpunit_selenium_test_case.php';
+//require_once($filename);
 
 require 'config.php';
 
